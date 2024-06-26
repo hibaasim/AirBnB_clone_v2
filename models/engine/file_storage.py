@@ -21,8 +21,8 @@ class FileStorage:
             if isinstance(cls, str):
                 cls = globals().get(cls)
             if cls and issubclass(cls, BaseModel):
-                cls_dict = (k: v for k, v in self.__objects.items()
-                            if isinstance(v, cls))
+                cls_dict = {k: v for k, v in self.__objects.items()
+                        if isinstance(v, cls)}
                 return cls_dict
         return FileStorage.__objects
 
@@ -54,17 +54,19 @@ class FileStorage:
                         self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
+        except json.decoder.JSONDecodeError:
+            pass
 
-        def delete(self, obj=None):
-            """Delete obj from __objects if it’s inside - if obj is equal
+    def delete(self, obj=None):
+        """Delete obj from __objects if it’s inside - if obj is equal
             to None, the method should not do anything"""
-            if obj is None:
-                return
-            obj_delete = f"{obj.__class__.__name__}.{obj.id}"
+        if obj is None:
+            return
+        obj_delete = f"{obj.__class__.__name__}.{obj.id}"
 
-            try:
-                del FileStorage.__objects[obj_delete]
-            except AttributeError:
-                pass
-            except KeyboardInterrupt:
-                pass
+        try:
+            del FileStorage.__objects[obj_delete]
+        except AttributeError:
+            pass
+        except KeyboardInterrupt:
+            pass
