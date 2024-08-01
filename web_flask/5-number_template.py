@@ -33,11 +33,18 @@ def py_text(text="is cool"):
     return (f"Python {text}")
 
 
-@app.route('/number/<n>', strict_slashes=False)
+@app.route('/number/<int:n>', strict_slashes=False)
 def num(n):
     """Return 'n is a number' if it is int"""
     if isinstance(n, int):
         return (f"{n} is a number")
+
+
+@app.route('/number_template/<int:n>', strict_slashes=False)
+def num_temp(n):
+    """Return html page if n is int"""
+    if isinstance(n, int):
+        return (render_template("5-number.html", n=n)
 
 
 if __name__ == "__main__":
