@@ -11,16 +11,19 @@ def hello():
     """Return a given string"""
     return ("Hello HBNB!")
 
+
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
     """Return a given string"""
     return ("HBNB")
+
 
 @app.route('/c/<text>', strict_slashes=False)
 def c_text(text):
     """Return C <text>"""
     text = text.replace("_", " ")
     return (f"C {text}")
+
 
 @app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
