@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """A script that starts a flask web application"""
 
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -44,7 +44,7 @@ def num(n):
 def num_temp(n):
     """Return html page if n is int"""
     if isinstance(n, int):
-        return (render_template("5-number.html", n=n)
+        return (render_template("5-number.html", n=n))
 
 
 if __name__ == "__main__":
